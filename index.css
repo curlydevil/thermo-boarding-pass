@@ -95,3 +95,8 @@ div.value {
 .barcodes > img:not(:last-child) {
     margin-bottom: 10mm;
 }
+
+.boarding-times > div {
+    display: flex;
+    flex-flow: column;
+}
