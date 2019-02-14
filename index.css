@@ -87,7 +87,16 @@ div.value {
     max-width: 45mm;
 }
 
-.barcode > img,
-.barcode {
+.barcodes > img,
+.barcodes {
     width: 100%;
+}
+
+.barcodes > img:not(:last-child) {
+    margin-bottom: 10mm;
+}
+
+.boarding-times > div {
+    display: flex;
+    flex-flow: column;
 }

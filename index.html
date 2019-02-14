@@ -8,7 +8,13 @@
 <body>
     <div id="app" class="flex-column">
         <div class="file-upload flex-column" v-if="!passData">
-            <input type="file" id="upload" v-on:change="parseFile($event)">
+            <select v-model="plugin">
+                <option disabled value="">Please, select airline</option>
+                <option v-for="key in Object.keys(plugins)" v-bind:value="plugins[key]">
+                    {{ plugins[key] }}
+                </option>
+            </select>
+            <input type="file" id="upload" v-on:change="parseFile($event)" v-if="plugin">
         </div>
 
         <div id="main-content" class="main-layout flex-column" v-if="passData">
@@ -61,25 +67,27 @@
             <div class="passanger-baggage">
                 <div class="checked-baggage">
                     <div class="label">CHECKED-IN BAGGAGE:</div>
-                    <div class="value">{{ passData.checkedBaggage }}</div>
+                    <div v-for="item in passData.checkedBaggage" class="value">{{ item }}</div>
                 </div>
                 <div class="hand-baggage">
                     <div class="label">HAND-LUGGAGE</div>
-                    <div class="value">{{ passData.handLuggage }}</div>
+                    <div v-for="item in passData.handLuggage" class="value">{{ item }}</div>
                 </div>
             </div>
-            <div class="barcode">
-                <img v-bind:src="passData.barCodeImage">
+            <div class="barcodes">
+                <img v-for="src in passData.barCodeImages" v-bind:src="src">
             </div>
         </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.5/jszip.js"></script>
-    <script src="https://cdn.rawgit.com/qaap/pdf417-generator/master/lib/libbcmath.js" type="text/javascript"></script>
-    <script src="https://cdn.rawgit.com/qaap/pdf417-generator/master/lib/bcmath.js" type="text/javascript"></script>
-    <script src="https://cdn.rawgit.com/qaap/pdf417-generator/master/lib/pdf417.js" type="text/javascript"></script>
+    <script src="https://cdn.rawgit.com/qaap/pdf417-generator/master/lib/libbcmath.js"></script>
+    <script src="https://cdn.rawgit.com/qaap/pdf417-generator/master/lib/bcmath.js"></script>
+    <script src="lib/pdf417.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.1/qrcode.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.3/vue.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script>
+    <script src="plugins/flyUIA.js"></script>
+    <script src="plugins/wizzAir.js"></script>
     <script src="index.js"></script>
 </body>
 
